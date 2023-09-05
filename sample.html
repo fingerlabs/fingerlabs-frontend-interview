@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fingerlabs Frontend Example</title>
+  </head>
+  <body>
+    <h1>Hello Techa Miya Example!</h1>
+    <pre id="data"></pre>
+    <script
+      src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+      type="application/javascript"
+    >
+    </script>
+    
+    <script type="application/javascript">
+      const provider = new ethers.providers.JsonRpcProvider('https://klaytn-api.fingerlabs.io');
+      const techaMiyaContractAddress = '0x5ffc2d8d30c3182b3e8a37d2372dd337b447a6bc'
+      const techaMiyaABI = [{
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "tokenId",
+            "type": "uint256"
+          }
+        ],
+        "name": "tokenURI",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      }];
+
+      const techaMiya = new ethers.Contract(techaMiyaContractAddress, techaMiyaABI, provider);
+      techaMiya.tokenURI(0)
+        .then(fetch)
+        .then(res => res.json())
+        .then(json => JSON.stringify(json, null ,2))
+        .then(data => {
+          document.querySelector('#data').innerHTML = data;
+        });
+    </script>
+  </body>
+</html>
