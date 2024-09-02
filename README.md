@@ -19,46 +19,11 @@ Klaytn 체인 안에서 실제 운영 중인 NFT 입니다.<br/>
 ## 과제 수행에 필요한 사전 정보
 Techa Miya NFT는 2023년 3월 기준으로 토큰(Token) 번호 0번 부터 약 2000번 까지 발행되어 있습니다.<br/>
 토큰 번호 0번의 NFT 이미지를 불러오기 위해서는 Klaytn 체인에 Techa Miya NFT의 0번 토큰에 대한 정보를 요청해야 합니다.<br/>
-이를 위해선 ABI(Application Binary Interface)와 스마트 컨트랙트 주소(Smart Contract Address)를 필요로 합니다.
 
-<br/>
+<br />
+<br />
 
-스마트 컨트랙트 주소와 ABI는 다음과 같습니다.
-```javascript
-  const techaMiyaContractAddress = '0x5ffc2d8d30c3182b3e8a37d2372dd337b447a6bc';
-  const techaMiyaABI = [{
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      }
-    ],
-    "name": "tokenURI",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  }];
-```
-<br/>
-
-Tehca Miya NFT 컨트랙트 인스턴스를 통해 tokenURI 함수를 호출하면 NFT 메타데이터 URI를 반환합니다. <br/>
-이를 이용하여 Techa Miya NFT의 특정 번호 토큰에 대한 정보를 불러올 수 있습니다. <br/>
-
-```javascript
-  const techaMiya = new ethers.Contract(techaMiyaContractAddress, techaMiyaABI, provider);
-  await techaMiya.tokenURI(0); // https://planet-miya.sunmiya.club/techa/0.json
-```
-
-<br/>
-
-https://planet-miya.sunmiya.club/techa/0.json 에 접속하면 NFT 메타데이터가 JSON 형식으로 반환됩니다.
+NFT 메타데이터 URI https://planet-miya.sunmiya.club/techa/0.json 에 접속하면 NFT 메타데이터가 JSON 형식으로 반환됩니다.
 ```json
 {
   "name": "Techa Miya #0000",
